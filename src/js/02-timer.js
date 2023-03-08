@@ -12,6 +12,8 @@ let chooseDate = new Date();
 let timerMs = 0;
 let idInterval = null;
 
+btnStartEl.disabled = true;
+
 function convertMs(ms) {
   // Number of milliseconds per unit of time
   const second = 1000;
@@ -35,9 +37,6 @@ const addLeadingZero = value => {
   return String(value).padStart(2, '0');
 };
 
-// console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -46,14 +45,15 @@ const options = {
   onClose(selectedDates) {
     chooseDate = selectedDates[0].getTime();
     const dateNow = Date.now();
-    Notiflix.Notify.failure('date now and choose date', dateNow, chooseDate);
+    console.log('date now and choose date', dateNow, chooseDate);
+
     if (chooseDate < dateNow) {
-      alert('You have to choose date in future');
+      Notify.failure('You have to choose date in future');
       btnStartEl.disabled = true;
       return;
     }
 
-    btnStartEl.disabled = false;
+    btnStartEl.removeAttribute('disabled');
     timerMs = chooseDate - dateNow;
   },
 };
@@ -71,7 +71,7 @@ const changeTimer = () => {
   dateSecondsEl.textContent = `${addLeadingZero(seconds)}`;
   if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
     clearInterval(idInterval);
-    btnStartEl.disabled = false;
+    btnStartEl.disabled = true;
   }
 };
 
