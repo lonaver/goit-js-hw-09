@@ -37,6 +37,13 @@ const addLeadingZero = value => {
   return String(value).padStart(2, '0');
 };
 
+const drawTimer = ({ days, hours, minutes, seconds }) => {
+  dateDaysEl.textContent = `${addLeadingZero(days)}`;
+  dateHoursEl.textContent = `${addLeadingZero(hours)}`;
+  dateMinutesEl.textContent = `${addLeadingZero(minutes)}`;
+  dateSecondsEl.textContent = `${addLeadingZero(seconds)}`;
+};
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -52,8 +59,8 @@ const options = {
       btnStartEl.disabled = true;
       return;
     }
-
-    btnStartEl.removeAttribute('disabled');
+    changeTimer();
+    btnStartEl.disabled = false;
     timerMs = chooseDate - dateNow;
   },
 };
@@ -62,16 +69,12 @@ flatpickr(dateInputEl, options);
 
 const changeTimer = () => {
   timerMs = chooseDate - Date.now();
-
   let { days, hours, minutes, seconds } = convertMs(timerMs);
-
-  dateDaysEl.textContent = `${addLeadingZero(days)}`;
-  dateHoursEl.textContent = `${addLeadingZero(hours)}`;
-  dateMinutesEl.textContent = `${addLeadingZero(minutes)}`;
-  dateSecondsEl.textContent = `${addLeadingZero(seconds)}`;
+  drawTimer({ days, hours, minutes, seconds });
   if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
     clearInterval(idInterval);
     btnStartEl.disabled = true;
+    Notify.success('Time is over');
   }
 };
 

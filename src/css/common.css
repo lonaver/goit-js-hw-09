@@ -84,11 +84,14 @@ img {
   font-size: 1rem;
   line-height: 1rem;
   color: rgb(0, 0, 0, 0.7);
+  cursor: pointer;
 }
 .wrapper button:enabled {
   background-color: rgb(5, 229, 249);
+  box-shadow: 0 0 1px 2px yellow;
 }
 
 .wrapper button:disabled {
   background-color: rgb(5, 229, 249, 0.3);
+  cursor: auto;
 }
