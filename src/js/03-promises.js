@@ -4,6 +4,7 @@ const formEl = document.querySelector('form');
 const inputDelayEl = document.querySelector('input[name="delay"]');
 const inputStepEl = document.querySelector('input[name="step"]');
 const inputAmountEl = document.querySelector('input[name="amount"]');
+const btnSubmitEl = document.querySelector('button');
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
@@ -11,10 +12,8 @@ function createPromise(position, delay) {
       const shouldResolve = Math.random() > 0.3;
       if (shouldResolve) {
         // Fulfill
-        // console.log('resolve', position, delay);
         resolve({ position, delay });
       } else {
-        // console.log('reject', position, delay);
         reject({ position, delay });
       }
     }, delay);
@@ -26,9 +25,10 @@ const handleSubmitPromise = e => {
   const numberOfPromise = Number(inputAmountEl.value);
   let delay = Number(inputDelayEl.value);
   const stepPromise = Number(inputStepEl.value);
+  formEl.reset();
 
-  for (let position = 0; position < numberOfPromise; position++) {
-    createPromise(position, delay)
+  for (let i = 0; i < numberOfPromise; i++) {
+    createPromise(i + 1, delay)
       .then(({ position, delay }) =>
         Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`)
       )

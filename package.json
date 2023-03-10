@@ -2,20 +2,20 @@
   "name": "goit-js-hw-09",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://goitacademy.github.io/goit-js-hw-09",
+  "homepage": "https://lonaver.github.io/goit-js-hw-09",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /goit-js-hw-09/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goitacademy/goit-js-hw-09.git"
+    "url": "git+https://github.com/lonaver/goit-js-hw-09.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/goitacademy/goit-js-hw-09/issues"
+    "url": "https://github.com/lonaver/goit-js-hw-09/issues"
   },
   "dependencies": {
     "flatpickr": "^4.6.13",
